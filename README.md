@@ -1,6 +1,6 @@
 # Forensic Anti-patterns in Machine Learning Engineering 
 
-## SQAProjectTeam
+## Team10
 ## Nico Marthe, Michael Moskowitz, Will Tobens, Garrett Scott
 
 
