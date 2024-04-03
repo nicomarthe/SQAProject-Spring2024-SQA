@@ -1,6 +1,12 @@
 # Forensic Anti-patterns in Machine Learning Engineering 
 
-## Farzana Ahmed Bhuiyan and Akond Rahman 
+## SQAProjectTeam
+## Nico Marthe, Michael Moskowitz, Will Tobens, Garrett Scott
+
+
+
+
+
 
 ### Details 
 
