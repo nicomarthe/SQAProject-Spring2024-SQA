@@ -1,0 +1,9 @@
+#!/bin/sh
+if ! git diff --cached --name-only --diff-filter=ACM | grep -E "\.py$" > /dev/null; then
+    echo "No python files changed, skipping security checks."
+    exit 0
+fi
+
+bandit -r FAME-ML/ -f csv -a vuln -o FAME-ML.vuln.csv
+bandit -r mining/ -f csv -a vuln -o mining.vuln.csv
+bandit -r empirical/ -f csv -a vuln -o empirical.vuln.csv
