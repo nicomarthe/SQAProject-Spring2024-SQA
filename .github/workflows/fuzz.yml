@@ -20,4 +20,4 @@ jobs:
         pip install hypothesis
 
     - name: Run fuzzing tests
-      run: python fuzz.py
+      run: python ./mining/fuzz.py
