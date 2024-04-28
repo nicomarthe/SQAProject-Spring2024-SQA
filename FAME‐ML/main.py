@@ -13,16 +13,29 @@ import pandas as pd
 import py_parser 
 import numpy as np 
 
+#import logging object for forensic purposes
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='logfile.log')
+
 
 def giveTimeStamp():
+  # Added logger 1
+  logger = logging.getLogger(__name__)
   tsObj = time.time()
   strToret = datetime.datetime.fromtimestamp(tsObj).strftime(constants.TIME_FORMAT) 
+  logger.info('Timestamp generated: %s', strToret)
   return strToret
   
 
 def getCSVData(dic_, dir_repo):
+	# Create logger instance and get information (logger 2)
+	logger = logging.getLogger(__name__)  # Get logger object
+	logger.info('Starting getCSVData method')  # Log starting message
+	
 	temp_list = []
 	for TEST_ML_SCRIPT in dic_:
+		logger.debug('Processing script: %s', TEST_ML_SCRIPT)  # Log debug message
 		# print(constants.ANALYZING_KW + TEST_ML_SCRIPT) 
 		# Section 1.1a
 		data_load_counta = lint_engine.getDataLoadCount( TEST_ML_SCRIPT ) 
@@ -134,22 +147,28 @@ def getCSVData(dic_, dir_repo):
 
 		temp_list.append( the_tup )
 		# print('='*25)
+	logger.info('Finished getCSVData method')  # Log finishing message
 	return temp_list
   
   
 def getAllPythonFilesinRepo(path2dir):
+	# Added logger 3
+	logger = logging.getLogger(__name__)
 	valid_list = []
 	for root_, dirnames, filenames in os.walk(path2dir):
 		for file_ in filenames:
 			full_path_file = os.path.join(root_, file_) 
 			if( os.path.exists( full_path_file ) ):
 				if (file_.endswith( constants.PY_FILE_EXTENSION ) and (py_parser.checkIfParsablePython( full_path_file ) )   ):
-					valid_list.append(full_path_file) 
+					valid_list.append(full_path_file)
+					logger.debug('Found valid Python file: %s', full_path_file) 
 	valid_list = np.unique(  valid_list )
 	return valid_list
 
 
 def runFameML(inp_dir, csv_fil):
+	# Added logger 4
+	logger = logging.getLogger(__name__)
 	output_event_dict = {}
 	df_list = [] 
 	list_subfolders_with_paths = [f.path for f in os.scandir(inp_dir) if f.is_dir()]
@@ -159,6 +178,8 @@ def runFameML(inp_dir, csv_fil):
 			output_event_dict[subfolder] = events_with_dic
 		temp_list  = getCSVData(events_with_dic, subfolder)
 		df_list    = df_list + temp_list 
+		logger.info('Processed folder: %s', subfolder)
+		logger.info('Found %d Python files in folder: %s', len(events_with_dic), subfolder)
 		print(constants.ANALYZING_KW, subfolder)
 		print('-'*50)
 	full_df = pd.DataFrame( df_list ) 
@@ -168,9 +189,12 @@ def runFameML(inp_dir, csv_fil):
 
 
 if __name__=='__main__':
+	# Added logger 5
+	logger = logging.getLogger(__name__)
 	command_line_flag = False ## after acceptance   
 
 	t1 = time.time()
+	logger.info('Script execution started')
 	print('Started at:', giveTimeStamp() )
 	print('*'*100 )
 
@@ -200,11 +224,13 @@ if __name__=='__main__':
 		# full_dict = runFameML(repo_dir, output_csv)
 
 	print('*'*100 )
+	logger.info('Script execution ended')
 	print('Ended at:', giveTimeStamp() )
 	print('*'*100 )
 	
 	t2 = time.time()
-	time_diff = round( (t2 - t1 ) / 60, 5) 
+	time_diff = round( (t2 - t1 ) / 60, 5)
+	logger.info('Duration: %s minutes', time_diff) 
 	print('Duration: {} minutes'.format(time_diff) )
 	print('*'*100 )
 
