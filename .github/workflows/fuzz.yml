@@ -20,5 +20,5 @@ jobs:
         pip install -r ./mining/requirements.txt
 
     - name: Run fuzzing tests
-      run: python ./mining/fuzz.py
+      run: python fuzz.py
       working-directory: ./mining
