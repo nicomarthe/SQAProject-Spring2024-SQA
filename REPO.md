@@ -10,6 +10,13 @@
   - The power and broad use potential of GitHub Actions
 
 ## Nico
+- Accomplishments
+  - Created a fuzz.py script to fuzz 5 python methods in repository
+  - Created a fuzz.yml file that prepares Github Actions for running the fuzz tests
+  - Made sure the analysis ran on Github and gave feedback on what was wrong with the code
+- Lessons Learned
+  - How to properly fuzz and tests python methods
+  - How to set up .yml files and use them to test with GitHub Actions
 
 ## Garrett
 - Accomplishments
