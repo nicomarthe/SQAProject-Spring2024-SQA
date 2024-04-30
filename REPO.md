@@ -4,7 +4,7 @@
 
 ## Nico
 
-## Garret
+## Garrett
 
 ## Michael
 - Accomplishments
