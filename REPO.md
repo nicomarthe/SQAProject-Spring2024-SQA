@@ -5,6 +5,14 @@
 ## Nico
 
 ## Garrett
+- Accomplishments
+  - Added logging to main.py
+  - Ensured forensics could be easily performed on all 5 main functions
+  - Streamlined output into a logfile for user convenience
+- Lessons learned
+  - Effective use of logging for each function object
+  - How to maintain a consistent logging scheme to prevent confusion
+  - Portraying important characteristics of code through the use of forensics
 
 ## Michael
 - Accomplishments
